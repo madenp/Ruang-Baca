@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Pengunjung Ruang Baca</title>
+    <meta name="description" content="Sistem manajemen pengunjung ruang baca dengan fitur check-in dan check-out">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <!-- Floating Logo (Top Left) -->
+    <a href="index.html" class="floating-logo" title="Kembali ke Beranda">
+        <div class="floating-logo-container">
+            <div class="floating-logo-glow"></div>
+            <img src="Logo_Universitas_Halu_Oleo-1.png" alt="Logo UHO" class="floating-logo-image">
+            <div class="floating-logo-ring"></div>
+        </div>
+    </a>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-image-container">
+                        <div class="logo-glow"></div>
+                        <img src="Logo_Universitas_Halu_Oleo-1.png" alt="Logo Universitas Halu Oleo" class="logo-image">
+                        <div class="logo-ring"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Ruang Baca</h1>
+                        <span>Fakultas Ekonomi dan Bisnis</span>
+                    </div>
+                </div>
+                <div class="header-time">
+                    <div class="live-clock" id="liveClock"></div>
+                    <div class="live-date" id="liveDate"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <section class="stats-section">
+            <div class="stat-card stat-active">
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="activeVisitors">0</span>
+                    <span class="stat-label">Pengunjung Aktif</span>
+                </div>
+                <div class="stat-badge active-pulse"></div>
+            </div>
+            <div class="stat-card stat-today">
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="todayVisitors">0</span>
+                    <span class="stat-label">Kunjungan Hari Ini</span>
+                </div>
+            </div>
+            <div class="stat-card stat-total">
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <line x1="12" y1="20" x2="12" y2="10"></line>
+                        <line x1="18" y1="20" x2="18" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-number" id="totalVisitors">0</span>
+                    <span class="stat-label">Total Kunjungan</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Check-In Section -->
+            <section class="card check-in-card" id="checkInSection">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title-icon check-in-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                <polyline points="10 17 15 12 10 7"></polyline>
+                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h2>Check-In Pengunjung</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Visitor Type Tabs -->
+                    <div class="visitor-type-tabs">
+                        <button type="button" class="visitor-type-tab active" id="newVisitorTab" data-type="new">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
+                            </svg>
+                            Pengunjung Baru
+                        </button>
+                        <button type="button" class="visitor-type-tab" id="returningVisitorTab" data-type="returning">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Pernah Berkunjung
+                        </button>
+                    </div>
+
+                    <!-- Returning Visitor Selector (hidden by default) -->
+                    <div class="returning-visitor-section" id="returningVisitorSection" style="display: none;">
+                        <div class="form-group">
+                            <label>Pilih Pengunjung</label>
+                            <div class="returning-visitor-search">
+                                <div class="search-input-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input type="text" id="returningVisitorSearch" placeholder="Cari nama pengunjung..."
+                                        autocomplete="off">
+                                </div>
+                                <div class="returning-visitor-list" id="returningVisitorList">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="selected-visitor-info" id="selectedVisitorInfo" style="display: none;">
+                            <div class="selected-visitor-badge">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                <span id="selectedVisitorName">Nama Pengunjung</span>
+                                <span id="selectedVisitorJurusan" class="visitor-jurusan-badge"></span>
+                                <span id="selectedVisitorId" class="visitor-id-badge"></span>
+                                <button type="button" class="clear-selection" id="clearSelection">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="checkInForm" class="check-in-form">
+                        <!-- New Visitor Form Fields -->
+                        <div id="newVisitorFields">
+                            <div class="form-group">
+                                <label for="jurusan">Jurusan</label>
+                                <select id="jurusan" name="jurusan" required>
+                                    <option value="">Pilih jurusan</option>
+                                    <option value="IESP">IESP</option>
+                                    <option value="Manajemen">Manajemen</option>
+                                    <option value="Akuntansi">Akuntansi</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorName">Nama Lengkap</label>
+                                <input type="text" id="visitorName" name="visitorName"
+                                    placeholder="Masukkan nama lengkap" required autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorId">NIM / NIP / ID</label>
+                                <input type="text" id="visitorId" name="visitorId"
+                                    placeholder="Masukkan NIM/NIP/ID (opsional)" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="purpose">Tujuan Kunjungan</label>
+                            <select id="purpose" name="purpose" required>
+                                <option value="">Pilih tujuan kunjungan</option>
+                                <option value="Membaca Buku">Membaca Buku</option>
+                                <option value="Mencari Referensi">Mencari Referensi</option>
+                                <option value="Mengerjakan Tugas">Mengerjakan Tugas</option>
+                                <option value="Belajar Mandiri">Belajar Mandiri</option>
+                                <option value="Belajar Kelompok">Belajar Kelompok</option>
+                                <option value="Penelitian">Penelitian</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-check-in">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                <polyline points="10 17 15 12 10 7"></polyline>
+                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                            </svg>
+                            Check-In Sekarang
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Active Visitors Section -->
+            <section class="card visitors-card" id="activeVisitorsSection">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title-icon visitors-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h2>Pengunjung Aktif</h2>
+                    </div>
+                    <span class="badge badge-active" id="activeCount">0 Pengunjung</span>
+                </div>
+                <div class="card-body">
+                    <div class="visitors-list" id="activeVisitorsList">
+                        <div class="empty-state" id="emptyActiveState">
+                            <div class="empty-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <p>Belum ada pengunjung aktif</p>
+                            <span>Pengunjung yang check-in akan muncul di sini</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar with Leaderboards -->
+        <aside class="sidebar">
+            <!-- Top 3 by Visit Count -->
+            <div class="card leaderboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title-icon leaderboard-visits-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2>Top Pengunjung</h2>
+                    </div>
+                    <span class="badge badge-visits">Jumlah Kunjungan</span>
+                </div>
+                <div class="card-body">
+                    <div class="leaderboard-list" id="topVisitsList">
+                        <div class="empty-state-sm">
+                            <p>Belum ada data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 3 by Duration -->
+            <div class="card leaderboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="title-icon leaderboard-duration-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <h2>Top Durasi</h2>
+                    </div>
+                    <span class="badge badge-duration">Lama Berkunjung</span>
+                </div>
+                <div class="card-body">
+                    <div class="leaderboard-list" id="topDurationList">
+                        <div class="empty-state-sm">
+                            <p>Belum ada data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Link to History Page -->
+        <section class="card link-card">
+            <a href="history.html" class="history-link">
+                <div class="link-content">
+                    <div class="link-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="link-text">
+                        <h3>Lihat Riwayat Kunjungan</h3>
+                        <p>Klik untuk melihat semua data kunjungan, export, dan kelola riwayat</p>
+                    </div>
+                    <div class="link-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Ruang Baca Visitor Management System. All rights reserved.</p>
+            <p class="footer-credit">Developed by <strong>madenp</strong></p>
+        </footer>
+    </div>
+
+    <!-- Check-Out Modal -->
+    <div class="modal" id="checkOutModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Konfirmasi Check-Out</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="checkout-info">
+                    <div class="checkout-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="checkout-details">
+                        <h4 id="checkoutName">Nama Pengunjung</h4>
+                        <p id="checkoutPurpose">Tujuan Kunjungan</p>
+                        <span id="checkoutDuration">Durasi: 0 menit</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelCheckout">Batal</button>
+                <button class="btn btn-check-out" id="confirmCheckout">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Konfirmasi Check-Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <!-- Floating Check-In Button -->
+    <a href="#checkInSection" class="floating-btn" id="floatingCheckInBtn" title="Check-In Sekarang">
+        <div class="floating-btn-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            <span>Check-In</span>
+        </div>
+        <div class="floating-btn-pulse"></div>
+    </a>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
