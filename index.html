@@ -19,19 +19,14 @@
     <div class="bg-effects">
         <div class="bg-gradient"></div>
         <div class="bg-grid"></div>
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
+        <!-- Floating shapes removed for performance on low-end devices -->
     </div>
 
     <!-- Floating Logo (Top Left) -->
     <a href="index.html" class="floating-logo" title="Kembali ke Beranda">
         <div class="floating-logo-container">
-            <div class="floating-logo-glow"></div>
+            <!-- Glow and ring removed for performance -->
             <img src="Logo_Universitas_Halu_Oleo-1.png" alt="Logo UHO" class="floating-logo-image">
-            <div class="floating-logo-ring"></div>
         </div>
     </a>
 
@@ -42,9 +37,8 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-image-container">
-                        <div class="logo-glow"></div>
+                        <!-- Glow and ring removed for performance -->
                         <img src="Logo_Universitas_Halu_Oleo-1.png" alt="Logo Universitas Halu Oleo" class="logo-image">
-                        <div class="logo-ring"></div>
                     </div>
                     <div class="logo-text">
                         <h1>Ruang Baca</h1>
@@ -74,7 +68,7 @@
                     <span class="stat-number" id="activeVisitors">0</span>
                     <span class="stat-label">Pengunjung Aktif</span>
                 </div>
-                <div class="stat-badge active-pulse"></div>
+                <div class="stat-badge"></div>
             </div>
             <div class="stat-card stat-today">
                 <div class="stat-icon">
@@ -409,7 +403,7 @@
             </svg>
             <span>Check-In</span>
         </div>
-        <div class="floating-btn-pulse"></div>
+        <div class="floating-btn-pulse" style="display:none;"></div>
     </a>
 
     <script src="app.js"></script>

@@ -149,8 +149,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: var(--space-6);
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(20px);
+    background: rgba(30, 41, 59, 0.95);
+    /* backdrop-filter: blur(20px); removed for performance */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-xl);
@@ -196,8 +196,8 @@ body {
     border-radius: var(--radius-xl);
     position: relative;
     z-index: 2;
-    animation: logoFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.4));
+    /* animation: logoFloat 3s ease-in-out infinite; removed for performance */
+    /* filter: drop-shadow(0 4px 20px rgba(59, 130, 246, 0.4)); removed for performance */
 }
 
 .logo-glow {
@@ -308,8 +308,8 @@ body {
 .stat-card {
     position: relative;
     padding: var(--space-6);
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(20px);
+    background: rgba(30, 41, 59, 0.95);
+    /* backdrop-filter: blur(20px); removed for performance */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-2xl);
     display: flex;
@@ -572,8 +572,8 @@ body {
 
 /* Cards */
 .card {
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(20px);
+    background: rgba(30, 41, 59, 0.95);
+    /* backdrop-filter: blur(20px); removed for performance */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-2xl);
     animation: slideUp 0.5s ease;
@@ -1273,8 +1273,8 @@ body {
 .modal-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.85);
+    /* backdrop-filter: blur(4px); removed for performance */
 }
 
 .modal-content {
@@ -1473,8 +1473,8 @@ body {
     border-radius: var(--radius-lg);
     position: relative;
     z-index: 2;
-    animation: logoFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 4px 15px rgba(59, 130, 246, 0.4));
+    /* animation: logoFloat 3s ease-in-out infinite; removed for performance */
+    /* filter: drop-shadow(0 4px 15px rgba(59, 130, 246, 0.4)); removed for performance */
 }
 
 .floating-logo-glow {

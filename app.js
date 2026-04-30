@@ -354,7 +354,7 @@ function renderActiveVisitors() {
             </div>
             <div class="visitor-actions">
                 <div class="visitor-duration">
-                    <div class="time" data-checkin="${visitor.checkIn}">${calculateDurationHMS(visitor.checkIn)}</div>
+                    <div class="time" data-checkin="${visitor.checkIn}">${calculateDuration(visitor.checkIn)}</div>
                     <div class="label">Durasi</div>
                 </div>
                 <button class="btn-checkout-sm" onclick="openCheckoutModal('${visitor.id}')">
@@ -667,7 +667,7 @@ function showToast(message, type = 'success') {
 function updateDurations() {
     document.querySelectorAll('.visitor-duration .time[data-checkin]').forEach(el => {
         const checkIn = el.dataset.checkin;
-        el.textContent = calculateDurationHMS(checkIn);
+        el.textContent = calculateDuration(checkIn);
     });
 }
 
@@ -733,8 +733,8 @@ async function init() {
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Update durations every second for real-time HH:MM:SS display
-    durationUpdateInterval = setInterval(updateDurations, 1000);
+    // Update durations every minute for performance
+    durationUpdateInterval = setInterval(updateDurations, 60000);
 
     // Initial render
     renderActiveVisitors();
